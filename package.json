@@ -8,7 +8,7 @@
     "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Andrew Butler",
   "license": "ISC",
   "description": "",
   "dependencies": {
