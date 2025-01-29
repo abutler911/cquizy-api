@@ -3,13 +3,29 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import questionRoutes from "./routes/questions.js";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const allowedOrigins = [
+  "https://cquizy.com",
+  "http://127.0.0.1:5500",
+  "http://localhost:3000",
+];
+
 // Middleware
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
