@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB"))
+  .then(() => console.log("Connected to the DB..."))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 // Routes
@@ -36,5 +36,5 @@ app.use((err, req, res, next) => {
 
 // Start the Server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`CQuizy API is running on http://localhost:${PORT}`);
 });
