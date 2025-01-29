@@ -1,5 +1,5 @@
-const express = require("express");
-const Question = require("../models/questions");
+import express from "express";
+import Question from "../models/questions.js";
 
 const router = express.Router();
 
@@ -75,4 +75,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

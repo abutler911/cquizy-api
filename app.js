@@ -1,12 +1,10 @@
-// app.js
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+import express from "express";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import questionRoutes from "./routes/questions.js";
 
-require("dotenv").config();
-
-// Import Routes
-const questionRoutes = require("./routes/questions");
+dotenv.config();
 
 // Initialize Express App
 const app = express();
@@ -18,7 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB Connection
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+  })
   .then(() => console.log("Connected to the DB..."))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
