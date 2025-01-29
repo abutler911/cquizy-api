@@ -1,72 +1,44 @@
 [
   {
-    "question": "Question 2",
-    "answer": "Cool",
-    "category": "Yes",
-    "context": "Nope",
+    "question": "What is the minimum voltage for batteries 1 & 2?",
+    "answer": "21.0 or 22.5 with the recharge procedure",
+    "category": "Pre-Departure Ground Operations",
+    "context": "Cold, dark flight deck, batteries 1 & 2 selected on.",
     "questionNumber": 1
   },
   {
-    "question": "question",
-    "answer": "yes",
-    "category": "no",
-    "context": "yikes",
+    "question": "What is the procedure if the battery voltage is below 21.0?",
+    "answer": "Write it up, call maintenance.",
+    "category": "Pre-Departure Ground Operations",
+    "context": "Cold, dark flight deck, batteries 1 & 2 selected on.",
     "questionNumber": 2
   },
   {
-    "question": "Is this working?",
-    "answer": "yes",
-    "category": "I ",
-    "context": "think so",
+    "question": "The E-PBIT is automatically performed when an initial AC power source is introduced. What actions will interrupt the test?",
+    "answer": "Removal of AC power, pressurizing any hydraulic system, pressing any of the FCM buttons.",
+    "category": "Pre-Departure Ground Operations",
+    "context": "AC electrical power is established, safety and power-up checklist is complete.",
     "questionNumber": 3
   },
   {
-    "question": "what about this",
-    "answer": "does this add",
-    "category": "okay",
-    "context": "no",
+    "question": "If AC power is lost, what is the procedure for restoring power?",
+    "answer": "Power down the airplane using the 'leaving the airplane checklist' then power it back up using the 'safety and power-up checklist'.",
+    "category": "Pre-Departure Ground Operations",
+    "context": "AC electrical power is established, safety and power-up checklist is complete.",
     "questionNumber": 4
   },
   {
-    "question": "cool",
-    "answer": "yes",
-    "category": "no",
-    "context": "maybe",
+    "question": "BATT 1 OVERTEMP message populates on the EICAS with an associated triple chime and master warning light, what do you do?",
+    "answer": "Memory item, QRC",
+    "category": "Pre-Departure Ground Operations",
+    "context": "AC electrical power is established, safety and power-up checklist is complete.",
     "questionNumber": 5
   },
   {
-    "question": "",
-    "answer": "exit",
-    "category": "no",
-    "context": "bye",
+    "question": "What is the minimum hydraulic reservoir temp for ENG start?",
+    "answer": "-18C",
+    "category": "Pre-Departure Ground Operations",
+    "context": "Originating and before start",
     "questionNumber": 6
-  },
-  {
-    "question": "answer",
-    "answer": "answer",
-    "category": "mo",
-    "context": "money",
-    "questionNumber": 7
-  },
-  {
-    "question": "question",
-    "answer": "answer",
-    "category": "Pre-Flight",
-    "context": "Cold and Dark",
-    "questionNumber": 8
-  },
-  {
-    "question": "question",
-    "answer": "answer",
-    "category": "Pre-Flight",
-    "context": "Cold and Dark",
-    "questionNumber": 9
-  },
-  {
-    "question": "question",
-    "answer": "answer",
-    "category": "taxi",
-    "context": "running",
-    "questionNumber": 10
   }
 ]
