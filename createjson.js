@@ -12,22 +12,22 @@ let currentCategory = "";
 let currentContext = "";
 
 const categories = [
-  "Math",
-  "Science",
-  "History",
-  "Geography",
-  "Coding",
-  "Aviation",
-  "Law",
+  "1.0 - Pre-Departure Ground Operations",
+  "2.0 - Takeoff",
+  "3.0 - Climb",
+  "4.0 - Cruise",
+  "5.0 - Descent",
+  "6.0 - Approach/Missed Approach",
+  "7.0 - Landing",
+  "8.0 - After Landing",
 ];
 
 const contexts = [
-  "Beginner",
-  "Intermediate",
-  "Advanced",
-  "Trivia",
-  "Exam Prep",
-  "Practical Application",
+  "Cold, dark flight deck, batteries 1 & 2 selected on.",
+  "AC electrical power is established, safety and power-up checklist is complete.",
+  "Originating and Before Start",
+  "Engine Start and Pushback",
+  "After Start, Taxi, and Before Takeoff",
 ];
 
 const loadQuestions = () => {
@@ -82,7 +82,8 @@ const askQuestion = () => {
     ),
     (questionText) => {
       if (questionText.toLowerCase() === "exit") {
-        return confirmAndSave();
+        confirmAndSave();
+        return;
       } else if (questionText.toLowerCase() === "change") {
         return setCategoryAndContext();
       } else if (questionText.toLowerCase() === "review") {
@@ -135,10 +136,11 @@ const reviewQuestions = () => {
 const confirmAndSave = () => {
   if (questions.length === 0) {
     console.log(chalk.yellow("No questions to save."));
-    return rl.close();
+    rl.close();
+    process.exit(0); // Ensures the program exits completely
+    return;
   }
 
-  reviewQuestions();
   rl.question(
     chalk.green("Would you like to save these questions? (yes/no): "),
     (answer) => {
@@ -153,10 +155,12 @@ const confirmAndSave = () => {
             );
           }
           rl.close();
+          process.exit(0);
         });
       } else {
         console.log(chalk.red("⚠️ Questions not saved. Exiting..."));
         rl.close();
+        process.exit(0);
       }
     }
   );
