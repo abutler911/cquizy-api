@@ -40,5 +40,40 @@
     "category": "Pre-Departure Ground Operations",
     "context": "Originating and before start",
     "questionNumber": 6
+  },
+  {
+    "question": "What is the max fuel capacity?",
+    "answer": "20,935 lbs.",
+    "category": "Pre-Departure Ground Operations",
+    "context": "Originating and before start",
+    "questionNumber": 7
+  },
+  {
+    "question": "During fueling operations, a FUEL IMBALANCE caution message displays, what is the max fuel imbalance?",
+    "answer": "794 lbs.",
+    "category": "Pre-Departure Ground Operations",
+    "context": "Originating and before start",
+    "questionNumber": 8
+  },
+  {
+    "question": "What is the max temperature for APU start?",
+    "answer": "ISA +35",
+    "category": "Pre-Departure Ground Operations",
+    "context": "Originating and before start",
+    "questionNumber": 9
+  },
+  {
+    "question": "What time period must elapse after the EICAS is energized prior to starting the APU?",
+    "answer": "30 seconds",
+    "category": "Pre-Departure Ground Operations",
+    "context": "Originating and before start",
+    "questionNumber": 10
+  },
+  {
+    "question": "An APU FUEL SOV FAIL caution message is displayed after the EICAS is fully energized, what do you do?",
+    "answer": "This is a nuisance message (FOIB), turn the APU switch to on, wait, turn it to off. Message should clear. ",
+    "category": "Pre-Departure Ground Operations",
+    "context": "Originating and before start",
+    "questionNumber": 11
   }
 ]
