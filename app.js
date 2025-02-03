@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 import questionRoutes from "./routes/questions.js";
 import bodyParser from "body-parser";
 import cors from "cors";
-
+import rateLimit from "express-rate-limit";
+import helmet from "helmet";
+import winston from "winston";
 dotenv.config();
 
 const app = express();
@@ -15,6 +17,23 @@ const allowedOrigins = [
   "http://127.0.0.1:5500",
   "http://localhost:3000",
 ];
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Too many requests from this IP, please try again after an hour!",
+});
+
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.File({ filename: "error.log", level: "error" }),
+  ],
+});
+
+app.use("/api", apiLimiter);
+app.use(helmet());
 
 // Middleware
 app.use(
@@ -46,7 +65,7 @@ app.get("/", (req, res) => {
 
 // Global Error Handling Middleware
 app.use((err, req, res, next) => {
-  console.error("🔥 Error:", err.stack);
+  logger.error(err.message);
   res.status(500).json({ error: "Something went wrong!" });
 });
 
