@@ -7,10 +7,13 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import winston from "winston";
+import { body, validationResult } from "express-validator";
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.set("trust proxy", 1);
 
 const allowedOrigins = [
   "https://cquizy.com",
