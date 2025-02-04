@@ -75,5 +75,33 @@
     "category": "Pre-Departure Ground Operations",
     "context": "Originating and before start",
     "questionNumber": 11
+  },
+  {
+    "questionNumber": 12,
+    "question": "Is it permissible to simultaneously use the APU bleed and the HP cart?",
+    "answer": "No",
+    "category": "1.0 - Pre-Departure Ground Operations",
+    "context": "Originating and Before Start"
+  },
+  {
+    "questionNumber": 13,
+    "question": "When should the TO DATA SET MENU on the MCDU be set to ENG?",
+    "answer": "5-10 degrees C and visible moisture up to 1700 AFE",
+    "category": "1.0 - Pre-Departure Ground Operations",
+    "context": "Originating and Before Start"
+  },
+  {
+    "questionNumber": 14,
+    "question": "When should the TO DATA SET MENU on the MCDU be set to ALL?",
+    "answer": "Less than 5 degrees C and visible moisture up to 1700 AFE",
+    "category": "1.0 - Pre-Departure Ground Operations",
+    "context": "Originating and Before Start"
+  },
+  {
+    "questionNumber": 15,
+    "question": "What is the SOPM definition of visible moisture?",
+    "answer": "Clouds, fog with visibility of one mile or less, rain, snow, sleet or ice crystals.",
+    "category": "1.0 - Pre-Departure Ground Operations",
+    "context": "Originating and Before Start"
   }
 ]
