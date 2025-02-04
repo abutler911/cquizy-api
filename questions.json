@@ -103,5 +103,26 @@
     "answer": "Clouds, fog with visibility of one mile or less, rain, snow, sleet or ice crystals.",
     "category": "1.0 - Pre-Departure Ground Operations",
     "context": "Originating and Before Start"
+  },
+  {
+    "questionNumber": 16,
+    "question": "What are the starter cranking limits on the ground?",
+    "answer": "Start #1 & #2: 90 seconds on, 10 seconds off. Start #3 - #5: 90 seconds on, 5 minutes off.",
+    "category": "1.0 - Pre-Departure Ground Operations",
+    "context": "Engine Start and Pushback"
+  },
+  {
+    "questionNumber": 17,
+    "question": "What are the dry motoring cycle limits?",
+    "answer": "Attempt #1: 90 seconds on, 5 minutes off. Attempt 2-5: 30 seconds on, 5 minutes off.",
+    "category": "1.0 - Pre-Departure Ground Operations",
+    "context": "Engine Start and Pushback"
+  },
+  {
+    "questionNumber": 18,
+    "question": "During engine start, you experience a hung start, what are the indications and what actions do you take?",
+    "answer": "N2 failing to CONTINUOUSLY accelerate to about 60%, N1 failing to accelerate by about 50% N2. Run the memory item, QRC.",
+    "category": "1.0 - Pre-Departure Ground Operations",
+    "context": "Engine Start and Pushback"
   }
 ]
