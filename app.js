@@ -41,6 +41,54 @@ const logger = winston.createLogger({
   ],
 });
 
+class AppError extends Error {
+  constructor(message, statusCode, errorCode = null, details = null) {
+    super(message);
+    this.statusCode = statusCode;
+    this.errorCode = errorCode || `ERR_${statusCode}`;
+    this.details = details;
+    this.isOperational = true;
+
+    Error.captureStackTrace(this, this.constructor);
+  }
+
+  static badRequest(message, errorCode = "ERR_BAD_REQUEST", details = null) {
+    return new AppError(message, 400, errorCode, details);
+  }
+
+  static unauthorized(
+    message = "Unauthorized",
+    errorCode = "ERR_UNAUTHORIZED",
+    details = null
+  ) {
+    return new AppError(message, 401, errorCode, details);
+  }
+
+  static forbidden(
+    message = "Forbidden",
+    errorCode = "ERR_FORBIDDEN",
+    details = null
+  ) {
+    return new AppError(message, 403, errorCode, details);
+  }
+
+  static notFound(
+    message = "Resource not found",
+    errorCode = "ERR_NOT_FOUND",
+    details = null
+  ) {
+    return new AppError(message, 404, errorCode, details);
+  }
+
+  static serverError(
+    message = "Internal server error",
+    errorCode = "ERR_SERVER",
+    details = null
+  ) {
+    return new AppError(message, 500, errorCode, details);
+  }
+}
+
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -98,7 +146,7 @@ app.use(
       secure: isProduction,
       httpOnly: true,
       sameSite: isProduction ? "strict" : "lax",
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      maxAge: 24 * 60 * 60 * 1000,
     },
   })
 );
@@ -142,7 +190,7 @@ const csrfProtection = csrf({
     secure: isProduction,
     httpOnly: true,
     sameSite: isProduction ? "strict" : "lax",
-    maxAge: 3600, // 1 hour
+    maxAge: 3600,
   },
 });
 
@@ -171,13 +219,16 @@ const validate = (validations) => {
         return next();
       }
 
-      return res.status(400).json({
-        status: "error",
-        errors: errors.array().map((err) => ({
-          field: err.param,
-          message: err.msg,
-        })),
-      });
+      const validationErrors = errors.array().map((err) => ({
+        field: err.param,
+        message: err.msg,
+      }));
+
+      throw AppError.badRequest(
+        "Validation failed",
+        "ERR_VALIDATION",
+        validationErrors
+      );
     } catch (error) {
       next(error);
     }
@@ -251,17 +302,61 @@ app.get("/", (req, res) => {
   res.send("Welcome to the CQuizy API");
 });
 
+app.all("*", (req, res, next) => {
+  next(AppError.notFound(`Cannot find ${req.originalUrl} on this server`));
+});
+
 app.use((err, req, res, next) => {
   if (err.code === "EBADCSRFTOKEN") {
-    logger.error("CSRF attack detected");
-    return res.status(403).json({ error: "Invalid or missing CSRF token" });
+    logger.error("CSRF attack detected", {
+      ip: req.ip,
+      path: req.originalUrl,
+      method: req.method,
+    });
+    return res.status(403).json({
+      status: "error",
+      error: {
+        message: "Invalid or missing CSRF token",
+        code: "ERR_CSRF",
+      },
+    });
   }
   next(err);
 });
 
 app.use((err, req, res, next) => {
-  logger.error(err.message);
-  res.status(500).json({ error: "Something went wrong!" });
+  const statusCode = err.statusCode || 500;
+  const errorCode = err.errorCode || "ERR_SERVER";
+
+  logger.error(`${statusCode} - ${err.message}`, {
+    ip: req.ip,
+    method: req.method,
+    url: req.originalUrl,
+    errorCode,
+    details: err.details,
+    stack: err.stack,
+  });
+
+  const errorResponse = {
+    status: "error",
+    error: {
+      message:
+        statusCode === 500 && isProduction
+          ? "Internal server error"
+          : err.message,
+      code: errorCode,
+    },
+  };
+
+  if (err.details && (!isProduction || statusCode < 500)) {
+    errorResponse.error.details = err.details;
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    errorResponse.error.stack = err.stack;
+  }
+
+  res.status(statusCode).json(errorResponse);
 });
 
 const server = app.listen(PORT, () => {
@@ -297,4 +392,4 @@ const gracefulShutdown = (signal) => {
 process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
 process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 
-export { validate };
+export { validate, AppError };
